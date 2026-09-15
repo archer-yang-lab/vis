@@ -11,6 +11,16 @@
       "preview": "previews/rotations.svg",
       "file": "visualizations/rotations-and-columns/interactive.html",
       "explanation": "visualizations/rotations-and-columns/explanation.html"
+    },
+    {
+      "slug": "principal-angles",
+      "title": "Principal vectors and angles",
+      "description": "Compare two planes, find their closest directions, and see why each principal vector projects along its partner.",
+      "topic": "Linear algebra",
+      "tags": ["Subspaces", "SVD", "Projections"],
+      "preview": "previews/principal-angles.svg",
+      "file": "visualizations/principal-angles/interactive.html",
+      "explanation": "visualizations/principal-angles/explanation.html"
     }
   ]
 }

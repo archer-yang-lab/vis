@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Principal vectors and angles — interactive example</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="interactive.css">
+  <script type="module" src="interactive.js"></script>
+</head>
+<body>
+<main id="principal-demo">
+  <p class="definition">Let e₁, e₂, e₃ be the standard unit vectors. The <span class="blue-key">blue plane</span> is span(e₁, e₂); the <span class="orange-key">orange plane</span> is span(e₁, cos φ e₂ + sin φ e₃).</p>
+  <div class="main-controls">
+    <label for="plane-angle">Plane angle φ <output id="phi-value">40°</output><input id="plane-angle" type="range" min="0" max="90" step="1" value="40"></label>
+    <fieldset><legend>Highlight a principal-vector pair</legend><div class="pair-choices">
+      <label><input type="radio" name="pair" value="0"> Pair 1 · shared direction</label>
+      <label><input type="radio" name="pair" value="1" checked> Pair 2 · remaining directions</label>
+    </div></fieldset>
+  </div>
+  <p class="pair-definition">In pair <span id="pair-number">2</span>, uᵢ is the blue unit vector, ûᵢ is the orange unit vector, and θᵢ is their angle. P projects onto the blue plane.</p>
+  <div class="diagrams">
+    <section><h2>Two planes in 3D</h2><p class="view-note" id="plane-note">The planes meet along e₁.</p><svg id="planes" role="img" aria-label="The planes, principal vectors, and orthogonal projection in three dimensions"></svg></section>
+    <section><h2 id="section-title">Pair 2 · cross-section</h2><p class="view-note" id="section-note">The e₂–e₃ plane shows the actual angle.</p><svg id="cross-section" role="img" aria-label="A cross-section showing the principal angle and projection length"></svg></section>
+  </div>
+  <div class="legend" aria-label="Vector legend"><span><i class="line blue"></i>uᵢ</span><span><i class="line orange"></i>ûᵢ</span><span><i class="line projected"></i>Pûᵢ</span><span><i class="line input"></i>Rotated input basis</span></div>
+  <div class="angle-summary"><span>θ₁ = 0°</span><span>θ₂ = <output id="theta-two">40°</output></span><span id="projection-identity">Pû₂ = 0.766 u₂</span><span id="projection-length">Projection length = 0.766</span></div>
+  <p class="state-note" id="pair-note">The second pair is perpendicular to e₁ within each plane.</p>
+
+  <section class="basis-section" aria-labelledby="basis-title">
+    <h2 id="basis-title">Change the bases, keep the planes</h2>
+    <p>The input bases are V = [v₁, v₂] and V̂ = [v̂₁, v̂₂], with orthonormal columns. The sliders rotate these columns within their own planes.</p>
+    <div class="basis-controls">
+      <label for="basis-alpha">Blue basis rotation α <output id="alpha-value">0°</output><input id="basis-alpha" type="range" min="-90" max="90" step="1" value="0"></label>
+      <label for="basis-beta">Orange basis rotation β <output id="beta-value">0°</output><input id="basis-beta" type="range" min="-90" max="90" step="1" value="0"></label>
+    </div>
+    <p class="coefficient-intro">For the selected pair, the coordinates rᵢ and ℓᵢ recover the principal vectors:</p>
+    <div class="combinations"><output id="u-combination">u₂ = 0.000 v₁ + 1.000 v₂</output><output id="uhat-combination">û₂ = 0.000 v̂₁ + 1.000 v̂₂</output></div>
+    <p class="svd-intro">Define M = V̂ᵀV. Its singular value decomposition is M = LΣRᵀ, where L and R are orthogonal, ℓᵢ and rᵢ are their respective columns, and Σ = diag(cos θ₁, cos θ₂).</p>
+    <div class="matrix-grid" aria-label="Singular value decomposition matrices">
+      <div class="matrix-block"><span>M = V̂ᵀV</span><div id="matrix-m" class="matrix" role="img"></div></div>
+      <div class="matrix-block"><span>L</span><div id="matrix-l" class="matrix" role="img"></div></div>
+      <div class="matrix-block"><span>Σ</span><div id="matrix-s" class="matrix" role="img"></div></div>
+      <div class="matrix-block"><span>Rᵀ</span><div id="matrix-rt" class="matrix" role="img"></div></div>
+    </div>
+    <p class="state-note" id="basis-note">At α = β = 0°, the input columns already form principal-vector pairs.</p>
+  </section>
+  <p class="edge-note" id="edge-note">Principal vectors are unit vectors. Their projections can be shorter.</p>
+  <div class="sr-only" id="announcement" aria-live="polite"></div>
+  <noscript>This interactive example needs JavaScript. The explanation below gives the same principal-vector pairs and projection identity.</noscript>
+</main>
+</body>
+</html>
