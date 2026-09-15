@@ -1,0 +1,16 @@
+{
+  "title": "Visualization library",
+  "description": "Interactive explanations of mathematics and statistics.",
+  "visualizations": [
+    {
+      "slug": "rotations-and-columns",
+      "title": "Rotations and column orthogonality",
+      "description": "See why rotating vectors preserves their angle, while mixing the columns of a matrix may change it.",
+      "topic": "Linear algebra",
+      "tags": ["Matrix multiplication", "PPCA"],
+      "preview": "previews/rotations.svg",
+      "file": "visualizations/rotations-and-columns/interactive.html",
+      "explanation": "visualizations/rotations-and-columns/explanation.html"
+    }
+  ]
+}

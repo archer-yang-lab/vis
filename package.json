@@ -1,0 +1,12 @@
+{
+  "name": "visualization-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A small library of interactive mathematics and statistics visualizations.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

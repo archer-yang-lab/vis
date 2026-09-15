@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="128" viewBox="0 0 200 128">
+<rect width="200" height="128" fill="#f6f8fa"/>
+<g fill="none" stroke="#d1d9e0"><path d="M12 77h77M50 18v93M112 77h77M150 18v93"/></g>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4">
+<path d="m50 77 29-29m-7 0h7v7" stroke="#0969da"/><path d="m50 77-14.5-14.5m0 7v-7h7" stroke="#bc4c00"/>
+<path d="m150 77 29-14.5m-7-2 7 2-3 6" stroke="#0969da"/><path d="m150 77-29-14.5m3 6-3-6 7-2" stroke="#bc4c00"/>
+</g><g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="11" text-anchor="middle" fill="#59636e"><text x="50" y="117">RW · 90°</text><text x="150" y="117">WR · 126.9°</text></g>
+</svg>
