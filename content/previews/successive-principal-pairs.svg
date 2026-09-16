@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 128" width="200" height="128">
+<rect width="200" height="128" fill="#f6f8fa"/>
+<g fill="none" stroke="#d1d9e0"><path d="M12 58h66M45 25v66M122 58h66M155 25v66"/><circle cx="155" cy="58" r="27" stroke-dasharray="3 4"/></g>
+<circle cx="45" cy="58" r="27" fill="none" stroke="#0969da" stroke-width="1.7"/>
+<g fill="none" stroke="#0969da" stroke-width="2.3" stroke-linejoin="round"><path d="M45 58h27m-6-4 6 4-6 4M155 58V31m-4 6 4-6 4 6"/></g>
+<g fill="#0969da"><circle cx="155" cy="31" r="3"/><circle cx="155" cy="85" r="3"/></g>
+<path d="M155 58h27" fill="none" stroke="#59636e" stroke-dasharray="3 3"/>
+<path d="M91 58h16m-5-5 5 5-5 5" fill="none" stroke="#59636e" stroke-width="1.3"/>
+<g font-family="system-ui,sans-serif" text-anchor="middle" font-size="11" fill="#59636e"><text x="45" y="108">All directions</text><text x="155" y="108">Only ±e₂</text></g>
+</svg>

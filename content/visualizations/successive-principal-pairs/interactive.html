@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Successive best-aligned pairs — interactive example</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="interactive.css">
+  <script type="module" src="interactive.js"></script>
+</head>
+<body>
+<main id="successive-demo">
+  <div class="example-control"><label for="example">Example</label><select id="example"><option value="separated">Two subspaces with no shared direction</option><option value="shared">Two subspaces with one shared direction</option></select></div>
+  <p>Let e₁, …, e₄ be the standard unit vectors in ℝ⁴. The blue subspace is 𝒰 = span(e₁, e₂). The orange subspace is 𝒰̂ = span(b₁, b₂), where</p>
+  <div class="basis-definitions"><span id="basis-one">b₁ = cos(20°)e₁ + sin(20°)e₃</span><span>b₂ = cos(60°)e₂ + sin(60°)e₄.</span></div>
+  <p class="coordinate-note">Each circle uses its own subspace’s coordinates. Angles between arrows in different panels cannot be read from their screen positions.</p>
+  <ol class="steps" aria-label="Selection progress"><li id="step-one" aria-current="step"><span>1</span>Choose the first pair</li><li id="step-two"><span>2</span>Add constraints; choose the next pair</li></ol>
+  <h2 id="stage-title">Pair 1: try any unit directions</h2>
+  <p id="stage-description">Choose a unit vector a in 𝒰 and a unit vector â in 𝒰̂. Try directions below, then find the pair that maximizes their inner product aᵀâ.</p>
+  <div class="circles">
+    <section aria-labelledby="blue-title"><h3 id="blue-title">a ∈ 𝒰</h3><p class="set-description" id="blue-set">Allowed unit vectors: the full circle</p><svg id="blue-circle" role="img" aria-label="Unit directions in the blue subspace"></svg><p class="coordinates" id="blue-coordinates"></p>
+      <div id="blue-free"><label for="alpha">Direction α within 𝒰 <output id="alpha-value">35°</output><input id="alpha" type="range" min="-180" max="180" step="1" value="35"></label></div>
+      <div id="blue-restricted" hidden><p class="constraint">aᵀa₁ = <output id="blue-constraint">0.000</output></p><button type="button" id="reverse-blue">Reverse a</button></div>
+    </section>
+    <section aria-labelledby="orange-title"><h3 id="orange-title">â ∈ 𝒰̂</h3><p class="set-description" id="orange-set">Allowed unit vectors: the full circle</p><svg id="orange-circle" role="img" aria-label="Unit directions in the orange subspace"></svg><p class="coordinates" id="orange-coordinates"></p>
+      <div id="orange-free"><label for="beta">Direction β within 𝒰̂ <output id="beta-value">70°</output><input id="beta" type="range" min="-180" max="180" step="1" value="70"></label></div>
+      <div id="orange-restricted" hidden><p class="constraint">âᵀâ₁ = <output id="orange-constraint">0.000</output></p><button type="button" id="reverse-orange">Reverse â</button></div>
+    </section>
+  </div>
+  <div class="score-line"><span>Current inner product aᵀâ</span><output id="score">0.000</output></div>
+  <svg id="score-meter" role="img" aria-label="Current inner product on a scale from minus one to one"></svg>
+  <p class="status" id="selection-note"></p>
+  <div class="actions"><button type="button" class="primary" id="advance">Find best pair 1</button><button type="button" id="reset">Start again</button></div>
+  <section class="results" aria-labelledby="results-title"><h2 id="results-title">Chosen principal pairs</h2><p>After maximization, σᵢ = aᵢᵀâᵢ and θᵢ = arccos(σᵢ).</p>
+    <table><thead><tr><th scope="col">Pair</th><th scope="col">aᵢ, âᵢ</th><th scope="col">σᵢ</th><th scope="col">θᵢ</th></tr></thead><tbody><tr id="result-one"><th scope="row">1</th><td>Not chosen</td><td>—</td><td>—</td></tr><tr id="result-two"><th scope="row">2</th><td>Not chosen</td><td>—</td><td>—</td></tr></tbody></table>
+    <p id="ordering" class="ordering">The first pair has no orthogonality constraints.</p>
+  </section>
+  <p class="detail-note">Only the maximized values are σᵢ. A trial pair can have a negative inner product; reversing one vector preserves feasibility and changes its sign.</p>
+  <div class="sr-only" id="announcement" aria-live="polite"></div>
+  <noscript>This example needs JavaScript. The explanation below describes both selection steps.</noscript>
+</main>
+</body>
+</html>

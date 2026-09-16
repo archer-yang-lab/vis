@@ -21,6 +21,16 @@
       "preview": "previews/principal-angles.svg",
       "file": "visualizations/principal-angles/interactive.html",
       "explanation": "visualizations/principal-angles/explanation.html"
+    },
+    {
+      "slug": "successive-principal-pairs",
+      "title": "Successive best-aligned pairs",
+      "description": "Choose the closest pair of unit vectors, then watch the feasible directions shrink as orthogonality constraints are added.",
+      "topic": "Linear algebra",
+      "tags": ["Principal angles", "Optimization", "Orthogonality"],
+      "preview": "previews/successive-principal-pairs.svg",
+      "file": "visualizations/successive-principal-pairs/interactive.html",
+      "explanation": "visualizations/successive-principal-pairs/explanation.html"
     }
   ]
 }
