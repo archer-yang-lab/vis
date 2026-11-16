@@ -15,11 +15,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      artifact_name: ${{ format('github-pages-{0}-{1}', github.run_id, github.run_attempt) }}
     steps:
       - name: Check out the library
         uses: actions/checkout@v6
@@ -28,6 +27,8 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
+      - name: Test the Metropolis–Hastings sampler
+        run: node --test scripts/test-metropolis-hastings.mjs
       - name: Build the library
         run: node scripts/build.mjs
       - name: Configure GitHub Pages
@@ -36,6 +37,40 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+          name: ${{ format('github-pages-{0}-{1}', github.run_id, github.run_attempt) }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Wait for the uploaded website to be available
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_ARTIFACT: ${{ needs.build.outputs.artifact_name }}
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts?per_page=100" \
+              | jq --arg name "$EXPECTED_ARTIFACT" '[.artifacts[] | select(.name == $name and .expired == false)] | length')
+            if [[ "$count" == "1" ]]; then exit 0; fi
+            if [[ "$count" -gt "1" ]]; then
+              echo "::error::More than one artifact matched this build."
+              exit 1
+            fi
+            echo "Waiting for the artifact to become available (attempt $attempt/12)."
+            sleep 5
+          done
+          echo "::error::The uploaded website did not become available within one minute."
+          exit 1
       - name: Deploy the website
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ needs.build.outputs.artifact_name }}
