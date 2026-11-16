@@ -56,7 +56,9 @@ function drawDecision(){
   if(last){svg.append(element('rect',{x:14,y:24,width:(width-28)*last.alpha,height:12,rx:3,fill:'var(--blue)'}));const x=px(last.u);svg.append(element('path',{d:`M${x},20l6,10 -6,10 -6,-10Z`,fill:'var(--orange)',stroke:'var(--canvas)','stroke-width':1.5}));}
   $('decision-result').className='decision-result'+(last?(last.accepted?' accepted':' rejected'):'');
   $('decision-result').textContent=last?`${last.accepted?'Accepted':'Rejected'} · x${chain.iteration} = ${format(last.next)}`:'No proposal yet';
-  $('decision-detail').textContent=last?(last.accepted?'u < α: move to y. The orange diamond marks u.':last.logTargetRatio===-Infinity?'The proposal lies outside the target support, so α = 0. Record x again.':'u ≥ α: stay at x and record it again. The orange diamond marks u.'):'Draw u uniformly from (0, 1). Accept if u < α; otherwise stay at x.';
+  const detail=last?(last.logTargetRatio===-Infinity?'The proposal lies outside the target support, so α = 0. Record x again.':''):'Draw u uniformly from (0, 1). Accept if u < α; otherwise stay at x.';
+  $('decision-detail').textContent=detail;
+  $('decision-detail').hidden=!detail;
 }
 function drawSamples(){
   const kept=chain.retained(),range=targetRange(config),bins=36,binWidth=(range[1]-range[0])/bins,counts=Array(bins).fill(0);let outside=0;
