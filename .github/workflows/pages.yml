@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: '22'
           package-manager-cache: false
-      - name: Test the Metropolis–Hastings sampler
-        run: node --test scripts/test-metropolis-hastings.mjs
+      - name: Test the samplers
+        run: node --test scripts/test-*.mjs
       - name: Build the library
         run: node scripts/build.mjs
       - name: Configure GitHub Pages

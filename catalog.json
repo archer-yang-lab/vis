@@ -41,6 +41,16 @@
       "preview": "previews/metropolis-hastings.svg",
       "file": "visualizations/metropolis-hastings/interactive.html",
       "explanation": "visualizations/metropolis-hastings/explanation.html"
+    },
+    {
+      "slug": "slice-sampling",
+      "title": "Slice sampling",
+      "description": "Choose a height under the density, reveal the horizontal slice, and sample across all its intervals.",
+      "topic": "Probability & statistics",
+      "tags": ["MCMC", "Gibbs sampling", "Conditional distributions"],
+      "preview": "previews/slice-sampling.svg",
+      "file": "visualizations/slice-sampling/interactive.html",
+      "explanation": "visualizations/slice-sampling/explanation.html"
     }
   ]
 }
