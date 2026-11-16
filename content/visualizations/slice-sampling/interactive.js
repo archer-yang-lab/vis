@@ -13,8 +13,8 @@ function plot(id,xRange,yRange,yLabel,xLabel='x'){
   svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.replaceChildren();
   const clip=el('clipPath',{id:id+'-clip'});clip.append(el('rect',{x:L,y:T,width:width-L-R,height:height-T-B}));const defs=el('defs');defs.append(clip);svg.append(defs);
   for(let i=0;i<=3;i++){const v=yRange[0]+i*(yRange[1]-yRange[0])/3;line(svg,L,y(v),width-R,y(v));label(svg,L-7,y(v)+4,tick(v),'end');}
-  const n=xLabel==='Iteration'?2:4;
-  for(let i=0;i<=n;i++){const v=xRange[0]+i*(xRange[1]-xRange[0])/n;label(svg,x(v),height-B+18,xLabel==='Iteration'?Math.round(v):tick(v));}
+  const ticks=xLabel==='Iteration'?[...new Set([xRange[0],Math.round((xRange[0]+xRange[1])/2),xRange[1]])]:Array.from({length:5},(_,i)=>xRange[0]+i*(xRange[1]-xRange[0])/4);
+  for(const v of ticks)label(svg,x(v),height-B+18,xLabel==='Iteration'?v:tick(v));
   label(svg,0,13,yLabel,'start');label(svg,width/2,height-3,xLabel);
   const data=el('g',{'clip-path':`url(#${id}-clip)`});svg.append(data);return {svg,data,width,height,x,y,xRange};
 }
