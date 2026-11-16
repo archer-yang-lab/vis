@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Metropolis–Hastings — interactive sampler</title><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="interactive.css"><script type="module" src="interactive.js"></script></head>
+<body><main id="mh-demo">
+<p class="intro">Let <strong>π(x)</strong> be the target density and <strong>q(y | x)</strong> the proposal density. From the current state <strong>x</strong>, propose <strong>y</strong>, then accept it with probability <strong>α(x, y)</strong>. If rejected, record x again.</p>
+<form id="settings" novalidate>
+<div class="settings-grid">
+<fieldset><legend>1. Target distribution</legend>
+<label for="target">Target</label><select id="target"><option value="normal">Gaussian</option><option value="mixture" selected>Two-component Gaussian mixture</option><option value="gamma">Gamma (positive values)</option></select>
+<div id="normal-fields" class="parameter-grid" hidden><label>Mean μ<input id="mean" type="number" value="0" min="-8" max="8" step="0.1"></label><label>Variance τ²<input id="target-variance" type="number" value="1" min="0.1" max="9" step="0.1"></label></div>
+<div id="mixture-fields" class="parameter-grid"><label>Means −m, +m; m =<input id="separation" type="number" value="2.5" min="0.5" max="5" step="0.1"></label><label>Component variance τ²<input id="component-variance" type="number" value="0.6" min="0.1" max="4" step="0.1"></label><label>Weight w on −m<input id="weight" type="number" value="0.5" min="0.05" max="0.95" step="0.05"></label></div>
+<div id="gamma-fields" class="parameter-grid" hidden><label>Shape k<input id="shape" type="number" value="3" min="1" max="8" step="0.5"></label><label>Scale θ<input id="scale" type="number" value="1" min="0.2" max="3" step="0.1"></label></div>
+<p id="target-formula" class="formula"></p>
+</fieldset>
+<fieldset><legend>2. Proposal distribution</legend>
+<label for="proposal">Proposal</label><select id="proposal"><option value="gaussian">Gaussian random walk</option><option value="uniform">Uniform random walk</option><option value="independent">Independent Gaussian</option></select>
+<div class="variance-control"><label for="variance">Proposal variance v</label><input id="variance" type="number" value="1" min="0.01" max="36" step="0.01"><input id="variance-slider" type="range" min="-2" max="1.556302501" step="any" value="0" aria-label="Proposal variance, logarithmic slider"><div class="range-labels"><span>0.01 · small moves</span><span>36 · large moves</span></div></div>
+<label id="proposal-mean-field" hidden>Proposal mean m₀<input id="proposal-mean" type="number" value="0" min="-10" max="20" step="0.1"></label>
+<p id="proposal-formula" class="formula"></p><p id="proposal-note" class="muted"></p>
+</fieldset></div>
+<details><summary>Starting point, warm-up, and random seed</summary><div class="advanced-grid"><label>Starting point x₀<input id="initial" type="number" value="0" min="-30" max="80" step="0.1"></label><label>Discard first B iterations<input id="burn" type="number" value="0" min="0" max="10000" step="1"></label><label>Random seed<input id="seed" type="number" value="42" min="0" max="4294967295" step="1"></label></div><p class="muted">The seed reproduces a run. The histogram uses x<sub>B+1</sub>, …, x<sub>t</sub>, including repeated states after rejections. The starting point x₀ is excluded.</p></details>
+</form>
+<div class="toolbar"><button id="step" class="primary">One step</button><button id="run" aria-pressed="false">Run</button><button id="batch">+1,000 steps</button><button id="reset">Reset chain</button><span id="iteration">Iteration 0</span></div>
+<p id="status" class="muted" role="status">Choose settings, then take one step. Changing a setting starts a new chain.</p>
+<div class="step-grid">
+<section aria-labelledby="proposal-heading"><h2 id="proposal-heading">One proposal</h2><div class="legend"><span><i class="line target"></i>Target π</span><span><i class="line proposal"></i>Proposal q(· | x)</span><span>● Current x</span><span class="candidate">◇ Proposed y</span></div><svg id="density" role="img" aria-label="Target and proposal densities with current and proposed states"></svg><p id="density-note" class="chart-note"></p></section>
+<section class="decision" aria-labelledby="decision-heading"><h2 id="decision-heading">Accept or reject</h2>
+<p class="formula">α(x, y) = min{1, π(y)q(x | y) / [π(x)q(y | x)]}</p>
+<dl><div><dt>Target ratio π(y) / π(x)</dt><dd id="target-ratio">—</dd></div><div><dt>Hastings correction q(x | y) / q(y | x)</dt><dd id="proposal-ratio">—</dd></div><div><dt>Acceptance probability α</dt><dd id="alpha">—</dd></div><div><dt>Uniform draw u ∈ (0, 1)</dt><dd id="uniform-draw">—</dd></div></dl>
+<svg id="acceptance-meter" role="img" aria-label="Acceptance probability and uniform random draw"></svg><p id="decision-result" class="decision-result">No proposal yet</p><p id="decision-detail" class="muted">Accept if u &lt; α. Otherwise, stay at x.</p>
+</section></div>
+<div class="stats" aria-label="Chain summary"><div><span>Accepted / proposed</span><strong id="acceptance-rate">—</strong></div><div><span>Retained states</span><strong id="retained">0</strong></div><div><span>Retained mean</span><strong id="sample-mean">—</strong></div><div><span>Target mean</span><strong id="target-mean">0.000</strong></div></div>
+<div class="sample-grid"><section aria-labelledby="histogram-heading"><h2 id="histogram-heading">Sampled distribution</h2><div class="legend"><span><i class="bar"></i>Histogram density</span><span><i class="line target"></i>Target π</span></div><svg id="histogram" role="img" aria-label="Density histogram of retained chain states compared with the target"></svg><p id="histogram-note" class="chart-note"></p></section><section aria-labelledby="trace-heading"><h2 id="trace-heading">Trace of the chain</h2><p class="chart-note">Last 300 iterations · repeated states form flat stretches</p><svg id="trace" role="img" aria-label="Current state versus iteration"></svg><p id="trace-note" class="chart-note"></p></section></div>
+<p class="takeaway">Try a small proposal variance, then a large one. Small moves may accept often but explore slowly; large moves may be rejected often. For a mixture target, watch whether the chain visits both peaks. A high acceptance rate alone does not show that the chain has explored the target.</p>
+</main></body></html>

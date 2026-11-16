@@ -31,6 +31,16 @@
       "preview": "previews/successive-principal-pairs.svg",
       "file": "visualizations/successive-principal-pairs/interactive.html",
       "explanation": "visualizations/successive-principal-pairs/explanation.html"
+    },
+    {
+      "slug": "metropolis-hastings",
+      "title": "Metropolis–Hastings sampling",
+      "description": "Customize a target and proposal, adjust the proposal variance, and watch acceptance decisions build a Markov chain.",
+      "topic": "Probability & statistics",
+      "tags": ["MCMC", "Sampling", "Markov chains"],
+      "preview": "previews/metropolis-hastings.svg",
+      "file": "visualizations/metropolis-hastings/interactive.html",
+      "explanation": "visualizations/metropolis-hastings/explanation.html"
     }
   ]
 }
