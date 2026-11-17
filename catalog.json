@@ -43,6 +43,26 @@
       "explanation": "visualizations/metropolis-hastings/explanation.html"
     },
     {
+      "slug": "gibbs-known",
+      "title": "Gibbs sampling: known parameters",
+      "description": "Alternate component labels and observations to sample from a fixed two-component Gaussian mixture.",
+      "topic": "Probability & statistics",
+      "tags": ["MCMC", "Gaussian mixtures", "Conditional distributions"],
+      "preview": "previews/gibbs-known.svg",
+      "file": "visualizations/gibbs-known/interactive.html",
+      "explanation": "visualizations/gibbs-known/explanation.html"
+    },
+    {
+      "slug": "gibbs-fit",
+      "title": "Gibbs sampling: fitting a mixture",
+      "description": "Keep the data fixed and draw labels, weights, means, and variances to learn a Gaussian mixture.",
+      "topic": "Probability & statistics",
+      "tags": ["MCMC", "Bayesian inference", "Gaussian mixtures"],
+      "preview": "previews/gibbs-fit.svg",
+      "file": "visualizations/gibbs-fit/interactive.html",
+      "explanation": "visualizations/gibbs-fit/explanation.html"
+    },
+    {
       "slug": "slice-sampling",
       "title": "Slice sampling",
       "description": "Choose a height under the density, reveal the horizontal slice, and sample across all its intervals.",
